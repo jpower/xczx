@@ -3,8 +3,10 @@ package com.xuecheng.framework.domain.course;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -22,11 +24,16 @@ public class CourseBase implements Serializable {
     @GeneratedValue(generator = "jpa-uuid")
     @Column(length = 32)
     private String id;
+    @NotEmpty(message = "课程名不能为空")
     private String name;
     private String users;
+    @NotEmpty(message = "课程分类不能为空")
     private String mt;
+    @NotEmpty(message = "课程分类不能为空")
     private String st;
+    @NotEmpty(message = "课程等级不能为空")
     private String grade;
+    @NotEmpty(message = "学习模式不能为空")
     private String studymodel;
     private String teachmode;
     private String description;

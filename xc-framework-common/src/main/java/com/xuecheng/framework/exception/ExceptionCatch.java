@@ -42,10 +42,16 @@ public class ExceptionCatch {
     @ExceptionHandler(CustomException.class)
     @ResponseBody
     public ResponseResult customException(CustomException customException){
+        customException.printStackTrace();
         //记录日志
         log.error("catch exception:{}",customException.getMessage());
         ResultCode resultCode = customException.getResultCode();
-        return new ResponseResult(resultCode);
+
+        if(resultCode != null) {
+            return new ResponseResult(resultCode);
+        }else {
+            return new ResponseResult(false,400,customException.getMessage());
+        }
     }
 
     /**

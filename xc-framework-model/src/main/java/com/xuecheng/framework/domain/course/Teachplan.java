@@ -1,5 +1,6 @@
 package com.xuecheng.framework.domain.course;
 
+import com.sun.istack.internal.NotNull;
 import lombok.Data;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;

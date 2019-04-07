@@ -24,6 +24,12 @@ public class ResponseResult implements Response {
     //提示信息
     String message;
 
+    public ResponseResult(boolean success, int code, String message) {
+        this.success = success;
+        this.code = code;
+        this.message = message;
+    }
+
     public ResponseResult(ResultCode resultCode){
         this.success = resultCode.success();
         this.code = resultCode.code();

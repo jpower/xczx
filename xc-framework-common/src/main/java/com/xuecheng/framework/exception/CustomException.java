@@ -11,6 +11,11 @@ import com.xuecheng.framework.model.response.ResultCode;
 public class CustomException extends RuntimeException {
    private ResultCode resultCode;
 
+
+    public CustomException(String message) {
+        super(message);
+    }
+
     public CustomException(ResultCode resultCode) {
         //异常信息为错误代码+异常信息        
         super("错误代码："+resultCode.code()+"错误信息："+resultCode.message());

@@ -15,4 +15,11 @@ public class ExceptionCast {
     public static void exception(ResultCode resultCode) {
         throw new CustomException(resultCode);
     }
+    /**
+     * 使用静态方法抛出自定义异常
+     * @param message
+     */
+    public static void exception(String message) {
+        throw new CustomException(message);
+    }
 }
