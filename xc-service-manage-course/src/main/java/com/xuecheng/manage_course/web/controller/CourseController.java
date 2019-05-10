@@ -6,12 +6,15 @@ import com.xuecheng.framework.domain.course.CourseMarket;
 import com.xuecheng.framework.domain.course.CoursePic;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
+import com.xuecheng.framework.domain.course.pojo.CourseView;
 import com.xuecheng.framework.domain.course.request.CourseListRequest;
+import com.xuecheng.framework.domain.course.response.CoursePublishResult;
 import com.xuecheng.framework.exception.ExceptionCast;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_course.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,7 +72,8 @@ public class CourseController implements CourseControllerApi {
      * @return
      */
     @Override
-    @GetMapping("/courseview/{courseId}")
+    @PreAuthorize("hasAuthority('xc_teachmanager1')")
+    @GetMapping("/coursebase/{courseId}")
     public CourseBase getCourseBaseById(@PathVariable("courseId") String courseId) {
 
         return courseService.getCourseBaseById(courseId);
@@ -150,5 +154,40 @@ public class CourseController implements CourseControllerApi {
     @DeleteMapping("/coursepic/delete/{courseId}")
     public ResponseResult deleteCoursePic(@PathVariable("courseId") String courseId) {
         return courseService.deleteCoursePic(courseId);
+    }
+
+    /**
+     * 查询课程页面所需的数据
+     * @param courseId
+     * @return
+     */
+    @Override
+    @GetMapping("/courseview/{courseId}")
+    public CourseView findCourseView(@PathVariable("courseId") String courseId) {
+        return courseService.findCourseView(courseId);
+    }
+
+    /**
+     * 课程预览
+     * @param courseId
+     * @return
+     */
+    @Override
+    @PostMapping("/preview/{courseId}")
+    public CoursePublishResult coursePreview(@PathVariable("courseId") String courseId) {
+        return courseService.coursePreview(courseId);
+    }
+
+    /**
+     * 课程发布
+     * @param courseId
+     * @return
+     */
+    @Override
+    @PostMapping("/publish/{courseId}")
+    public CoursePublishResult coursePublish(@PathVariable("courseId") String courseId) {
+
+
+        return courseService.publishCourse(courseId);
     }
 }

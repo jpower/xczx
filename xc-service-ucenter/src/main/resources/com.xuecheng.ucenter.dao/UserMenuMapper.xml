@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xuecheng.ucenter.dao.UserMenuMapper">
+
+    <select id="findXcMenuByUserId" parameterType="String" resultType="XcMenu">
+
+    select m.*
+    from xc_user_role ur
+    left join xc_permission p
+    on ur.role_id = p.role_id
+    left join xc_menu m
+    on p.menu_id = m.id
+    where user_id = #{id}
+
+    </select>
+
+</mapper>

@@ -4,6 +4,7 @@ import com.xuecheng.api.cms.CmsPageControllerApi;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.CmsPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.domain.cms.response.CmsPostPageResult;
 import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.QueryResult;
@@ -62,6 +63,32 @@ public class CmsPageController implements CmsPageControllerApi {
         CmsPageResult cmsPageResult = new CmsPageResult(CommonCode.SUCCESS, page);
         return cmsPageResult;
     }
+    /**
+     * 增加页面
+     *
+     * @param cmsPage
+     * @return
+     */
+    @Override
+    @PostMapping("/save")
+    public CmsPageResult saveCmsPage(@RequestBody CmsPage cmsPage) {
+        CmsPage page = cmsPageService.saveCmsPage(cmsPage);
+        CmsPageResult cmsPageResult = new CmsPageResult(CommonCode.SUCCESS, page);
+        return cmsPageResult;
+    }
+
+
+    /**
+     * 一键发布
+     * @param cmsPage
+     * @return
+     */
+    @Override
+    @PostMapping("/postPageQuick")
+    public CmsPostPageResult postPageQuick(@RequestBody CmsPage cmsPage) {
+
+        return cmsPageService.postPageQuick(cmsPage);
+    }
 
     /**
      * 修改页面
@@ -106,11 +133,17 @@ public class CmsPageController implements CmsPageControllerApi {
         return new CmsPageResult(CommonCode.SUCCESS, cmsPage);
     }
 
+    /**
+     * 发布页面
+     * @param pageId
+     * @return
+     * @throws Exception
+     */
     @Override
     @PostMapping("/postPage/{pageId}")
-    public ResponseResult post(@PathVariable("pageId") String pageId) throws Exception {
-        cmsPageService.postPage(pageId);
-        return new ResponseResult(CommonCode.SUCCESS);
+    public ResponseResult post(@PathVariable("pageId") String pageId) {
+
+        return cmsPageService.postPage(pageId);
 
     }
 

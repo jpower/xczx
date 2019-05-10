@@ -30,3 +30,24 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+
+eureka:
+  client:
+    registerWithEureka: true #服务注册，是否将自己注册到Eureka服务中
+    fetchRegistry: true #服务发现，是否从Eureka中获取注册信息
+    serviceUrl: #Eureka客户端与Eureka服务端的交互地址，高可用状态配置对方的地址，单机状态配置自己（如果不配置则默认本机8761端口）
+      defaultZone: ${EUREKA_SERVER:http://localhost:50101/eureka/}
+
+  instance:
+    prefer-ip-address: true
+    ip-address: ${IP_ADDRESS:127.0.0.1}
+    instance-id: ${spring.application.name}:${server.port}
+
+course-publish:
+  siteId: 5a751fab6abb5044e0d19ea1
+  templateId: 5aec5dd70e661808240ab7a6
+  previewUrl: http://www.xuecheng.com/cms/preview/
+  pageWebPath: /static/course/detail/
+  pagePhysicalPath: C:/src/xuecheng/static/course/detail/
+  dataUrlPre: http://localhost:31200/course/courseview/

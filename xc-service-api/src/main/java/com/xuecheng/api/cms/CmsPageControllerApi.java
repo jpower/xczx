@@ -3,12 +3,14 @@ package com.xuecheng.api.cms;
 import com.xuecheng.framework.domain.cms.CmsPage;
 import com.xuecheng.framework.domain.cms.request.CmsPageRequest;
 import com.xuecheng.framework.domain.cms.response.CmsPageResult;
+import com.xuecheng.framework.domain.cms.response.CmsPostPageResult;
 import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.io.IOException;
 
@@ -72,4 +74,10 @@ public interface CmsPageControllerApi {
      */
     @ApiOperation("页面发布")
     ResponseResult post(String pageId) throws Exception;
+
+    @ApiOperation("增加页面")
+    CmsPageResult saveCmsPage( CmsPage cmsPage);
+
+    @ApiOperation("一键发布")
+    CmsPostPageResult postPageQuick(CmsPage cmsPage);
 }

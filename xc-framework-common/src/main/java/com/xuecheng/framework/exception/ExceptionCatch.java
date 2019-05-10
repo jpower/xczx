@@ -30,8 +30,7 @@ public class ExceptionCatch {
         //定义异常类型所对应的错误代码
         builder.put(HttpMessageNotReadableException.class,CommonCode.INVALID_PARAM);
     }
-    //定义map，配置异常类型所对应的错误代码
-    private static ImmutableMap<Class<? extends Throwable>,ResultCode> EXCEPTIONS = builder.build();
+
 
 
     /**
@@ -65,6 +64,8 @@ public class ExceptionCatch {
         exception.printStackTrace();
         //记录日志
         log.error("catch exception:{}",exception.getMessage());
+        //定义map，配置异常类型所对应的错误代码
+        ImmutableMap<Class<? extends Throwable>,ResultCode> EXCEPTIONS = builder.build();
         ResultCode resultCode = EXCEPTIONS.get(exception.getClass());
         if(resultCode == null) {
             return new ResponseResult(CommonCode.SERVER_ERROR);

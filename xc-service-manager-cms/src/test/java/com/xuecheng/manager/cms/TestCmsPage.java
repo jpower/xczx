@@ -4,6 +4,7 @@ import com.mongodb.client.gridfs.GridFSBucket;
 import com.mongodb.client.gridfs.GridFSDownloadStream;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import com.xuecheng.framework.domain.cms.CmsConfig;
+import com.xuecheng.manager.cms.dao.CmsPageRepository;
 import javafx.application.Application;
 import org.apache.commons.io.IOUtils;
 import org.bson.types.ObjectId;
@@ -39,10 +40,12 @@ public class TestCmsPage {
     private GridFSBucket gridFSBucket;
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    private CmsPageRepository cmsPageRepository;
     @Test
     public void fun1() throws FileNotFoundException {
-        FileInputStream inputStream = new FileInputStream("C:/src/index_banner.ftl");
-        ObjectId objectId = gridFsTemplate.store(inputStream, "index_banner.ftl", "");
+        FileInputStream inputStream = new FileInputStream("C:/src/course.ftl");
+        ObjectId objectId = gridFsTemplate.store(inputStream, "course.ftl", "");
         System.out.println(objectId);
     }
 
@@ -75,6 +78,7 @@ public class TestCmsPage {
 
     @Test
     public void fun5() {
+        System.out.println(cmsPageRepository.findById("5ca99b8145ff2c329c5c6dfa").isPresent());
     }
 
 }

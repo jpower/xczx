@@ -38,8 +38,8 @@ public class CmsPagePreviewController extends BaseController {
         if(StringUtils.isEmpty(pageHtml)) {
             ExceptionCast.exception(CmsCode.CMS_GENERATEHTML_HTMLISNULL);
         }
-        PrintWriter writer = response.getWriter();
-        writer.write(pageHtml);
+        response.setContentType("text/html;charset=utf-8");
+        response.getOutputStream().write(pageHtml.getBytes("utf-8"));
 
     }
 
